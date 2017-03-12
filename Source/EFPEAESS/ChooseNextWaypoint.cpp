@@ -2,13 +2,16 @@
 
 #include "EFPEAESS.h"
 #include "ChooseNextWaypoint.h"
-
+#include "BehaviorTree/BlackboardComponent.h"
 
 EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 
-	UE_LOG(LogTemp, Warning, TEXT("HIYA I AM C++ Reporting in..."))
+	//UE_LOG(LogTemp, Warning, TEXT("HIYA I AM C++ Reporting in..."))
 
+	auto BlackboardComp = OwnerComp.GetBlackboardComponent();
+	auto Index = BlackboardComp->GetValueAsInt(IndexKey.SelectedKeyName);
+	UE_LOG(LogTemp, Warning, TEXT("Target Index: %i"), Index)
 	return EBTNodeResult::Succeeded;
 
 }
