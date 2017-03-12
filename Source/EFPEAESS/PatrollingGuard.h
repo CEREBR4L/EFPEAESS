@@ -12,10 +12,5 @@ UCLASS()
 class EFPEAESS_API APatrollingGuard : public ATP_ThirdPersonCharacter
 {
 	GENERATED_BODY()
-
-public:
-	UPROPERTY(EditInstanceOnly, Category = "Patrol")
-	TArray<AActor*> PatrolRoute; //TODO create getter
-	
 	
 };
