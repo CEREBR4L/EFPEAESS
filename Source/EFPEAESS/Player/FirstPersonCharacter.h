@@ -113,5 +113,7 @@ private:
 
 	AGun* Gun;
 
+	class UInputComponent* playerComponent;
+
 };
 
