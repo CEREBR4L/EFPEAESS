@@ -11,3 +11,4 @@ Saved
 *.xcodeproj
 *.xcworkspace
 .vs/
+/Content/Levels/FirstPersonExampleMap_BuiltData.uasset
