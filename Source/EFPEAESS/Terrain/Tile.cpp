@@ -12,10 +12,15 @@ ATile::ATile()
 
 }
 
-void ATile::PlaceActors() {
-	for (size_t i = 0; i < 200; i++) {
+void ATile::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn) {
+	
+	int numberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
+
+	for (size_t i = 0; i < numberToSpawn; i++) {
 		FVector SpawnPoint = FMath::RandPointInBox(FBox(FVector(0, -2000, 0), FVector(4000, 2000, 0)));
-		UE_LOG(LogTemp, Warning, TEXT("Spawn Point: %s"), *SpawnPoint.ToString())
+		AActor* Spawned = GetWorld()->SpawnActor<AActor>(ToSpawn);
+		Spawned->SetActorRelativeLocation(SpawnPoint);
+		Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 	}
 }
 
