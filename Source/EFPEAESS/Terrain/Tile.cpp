@@ -42,11 +42,11 @@ void ATile::Tick(float DeltaTime)
 
 bool ATile::CastSphere(FVector Location, float Radius) {
 	FHitResult HitResult;
-	bool HasHit = GetWorld()->SweepSingleByChannel(HitResult, Location, Location, FQuat::Identity, ECollisionChannel::ECC_Camera, FCollisionShape::MakeSphere(Radius));
+	bool HasHit = GetWorld()->SweepSingleByChannel(HitResult, Location, Location, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel2, FCollisionShape::MakeSphere(Radius));
 
 	FColor colour = HasHit ? FColor::Red : FColor::Green;
 
-	DrawDebugSphere(GetWorld(), Location, Radius, 100, colour, true, 100);
+	DrawDebugCapsule(GetWorld(), Location, 0, Radius, FQuat::Identity, colour, true, 100);
 
 	return HasHit;
 }
