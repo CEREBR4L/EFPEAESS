@@ -16,8 +16,14 @@ class EFPEAESS_API AInfiniteTerrainGameMode : public AEFPEAESSGameMode
 	
 public:
 
+	AInfiniteTerrainGameMode();
+
 	UFUNCTION(BlueprintCallable, Category = "Bounds Pool")
 	void PopulateBoundVolumePool();
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NavMesh Pool")
+	class UActorPool* NavMeshBoundsVolumePool;
 
 private:
 
