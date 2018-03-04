@@ -11,6 +11,8 @@ ATile::ATile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	MinExtent = FVector(0, -2000, 0);
+	MaxExtent = FVector(4000, 2000, 0);
 }
 
 void ATile::SetPool(UActorPool* InPool) {
@@ -24,10 +26,10 @@ void ATile::PositionNavMeshVolume()
 	NavMeshBoundsVolume = Pool->Checkout();
 
 	if (NavMeshBoundsVolume == nullptr) {
-		UE_LOG(LogTemp, Error, TEXT("Not enough actors in pool"))
+		UE_LOG(LogTemp, Error, TEXT("[%s] Not enough actors in pool"), *GetName())
 		return;
 	}
-
+	UE_LOG(LogTemp, Warning, TEXT("[%s] Checked out: [%s]"), *GetName(), *NavMeshBoundsVolume->GetName())
 	NavMeshBoundsVolume->SetActorLocation(GetActorLocation());
 }
 
@@ -50,7 +52,7 @@ void ATile::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn,
 bool ATile::GetEmptyLocation(FVector& outLocation, float Radius) {
 
 	for (size_t i = 0; i < 15; i++) {
-		FVector Location = FMath::RandPointInBox(FBox(FVector(0, -2000, 0), FVector(4000, 2000, 0)));
+		FVector Location = FMath::RandPointInBox(FBox(MinExtent, MaxExtent));
 
 		if (CanSpawnAtLocation(Location, Radius)) {
 			outLocation = Location;
